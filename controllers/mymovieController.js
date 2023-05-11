@@ -5,18 +5,44 @@ const Movie = require('../models/movieModel')
 
 const getMymovies = asyncHandler(async (req, res) => {
 
-    const mymovies = await Mymovie.find({ user: req.user.id })
-    if (!mymovies.length) {
-        res.status(400)
-        throw new Error('There are no movies saved')
-    }
+    await Mymovie.find({ user: req.user.id })
+        if (!mymovies.length) {
+            res.status(400)
+            throw new Error('There are no movies saved')
+        }
 
-    res.status(200).json(mymovies)
-})
+            res.status(200).send(mymovies)
+
+    })
+    
+    //.aggregate(mymovies, {_id: req.body.movie})
+    //Movie.populate(mymovies, { path: 'movie' })
+    
+
+
 
 const saveMymovies = asyncHandler(async (req, res) => {
     //const User = require('../models/userModel')
-    const findmovie = await Movie.findOne({_id: req.body.movie})
+    //const findmovie = await Movie.findOne({_id: req.body.movie})
+    // .populate({ path: 'movie', model: 'Mymovie' })
+    // .exec();
+
+    const findmovie = await Movie.aggregate(
+        [
+            {
+                $lookup: {
+					from: 'movies',
+					localField: 'movie',
+					foreignField: '_id',
+					as: 'movie'
+				 }
+
+            }
+        ]
+    )
+        res.status(200).send(findmovie)
+
+    
     //const userID = (req.user.id) Guarda el id del usuario por medio del token
     //console.log(`"${userID}"`)
 

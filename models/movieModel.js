@@ -62,4 +62,4 @@ const movieShema = mongoose.Schema({
     
 })
 
-module.exports = mongoose.model('Movie', movieShema)
+module.exports = Movie = mongoose.model('Movie', movieShema)

@@ -5,7 +5,7 @@ const { protect } = require('../middleware/authMw')
 
 router.route('/').get(protect, getMymovies).post(protect, saveMymovies)
 
-//router.get('/', protect, getTareas)
+//router.get('/mymovies', protect, getMymovies)
 //router.post('/', setTareas)
 
 router.route('/:id').delete(protect, deleteMymovies)

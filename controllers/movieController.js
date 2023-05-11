@@ -63,7 +63,9 @@ const updateMovieLikes = asyncHandler(async (req, res) => {
         throw new Error('Product not finded')
     }
 
-    const updatedMovieLike = await Movie.findByIdAndUpdate(req.params.id, req.body.vote_count, {new: true})
+    
+
+    const updatedMovieLike = await Movie.findByIdAndUpdate(req.params.id, req.body.vote_count+1, {new: true})
 
     res.status(200).json(updateMovieLikes)
 }) 

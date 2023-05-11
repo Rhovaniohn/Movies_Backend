@@ -6,7 +6,8 @@ router.route('/').get(getMovies).post(setMovie)
 //router.get('/', getTareas)
 //router.post('/', setTareas)
 
-router.route('/:id').put(updateMovie).put(updateMovieLikes).delete(deleteMovie)
+router.route('/:id').put(updateMovie).delete(deleteMovie)
+router.put('/likemovie/:id', updateMovieLikes)
 //router.put('/:id', updateTareas)
 //router.delete('/:id', deleteTareas)
 

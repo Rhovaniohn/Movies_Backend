@@ -91,6 +91,16 @@ const getMisDatos = asyncHandler(async (req, res) => {
     res.json(req.user)
 })
 
+//-----------------------
+
+// Guardar movie user
+
+const saveMovie = asyncHandler (async (req,res) => {
+    
+})
+
+
+
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d'
