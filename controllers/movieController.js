@@ -60,14 +60,17 @@ const updateMovieLikes = asyncHandler(async (req, res) => {
 
     if (!movie){
         res.status(400)
-        throw new Error('Product not finded')
+        throw new Error('Movie not finded')
     }
+    // vote_count: movie.vote_count+1,
+    // movie.vote_count ++
 
-    
 
-    const updatedMovieLike = await Movie.findByIdAndUpdate(req.params.id, req.body.vote_count+1, {new: true})
+    await Movie.findByIdAndUpdate(req.params.id,{vote_count: movie.vote_count}, {new: true})
+    movie.vote_count ++ 
+    await movie.save()
 
-    res.status(200).json(updateMovieLikes)
+    res.status(200).json(movie)
 }) 
 
 const deleteMovie = asyncHandler(async (req, res) => {
