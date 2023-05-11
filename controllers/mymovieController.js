@@ -5,7 +5,7 @@ const Movie = require('../models/movieModel')
 
 const getMymovies = asyncHandler(async (req, res) => {
 
-    await Mymovie.find({ user: req.user.id })
+    const mymovies = await Mymovie.find({ user: req.user.id })
         if (!mymovies.length) {
             res.status(400)
             throw new Error('There are no movies saved')
